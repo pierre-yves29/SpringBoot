@@ -140,6 +140,9 @@ public class Film {
         sb.append(String.format("%5sActeurs : [",""));
         for(int index = 0 ; index < acteurs.size() ; index++){
             sb.append(acteurs.get(index).toString());
+            if(acteurs.get(index).getId() == realisateur.getId()){
+                sb.append(ar);
+            }
             if (index < acteurs.size() - 1){
                 sb.append(", ");
             }
@@ -151,6 +154,9 @@ public class Film {
         sb.append(String.format("%5sAvis : [",""));
         for(int index = 0 ; index < avis.size() ; index++){
             sb.append(avis.get(index).toString());
+            if (index < avis.size() - 1){
+                sb.append(", ");
+            }
         }
         sb.append(String.format("]%n"));
         return sb.toString();
