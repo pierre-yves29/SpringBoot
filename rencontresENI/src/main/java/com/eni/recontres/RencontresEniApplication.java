@@ -12,7 +12,9 @@ import org.springframework.context.ConfigurableApplicationContext;
 public class RencontresEniApplication {
 
     public static void main(String[] args) {
-        ConfigurableApplicationContext applicationContext =  SpringApplication.run(RencontresEniApplication.class, args);
+        SpringApplication.run(RencontresEniApplication.class, args);
+
+        //ConfigurableApplicationContext applicationContext =  SpringApplication.run(RencontresEniApplication.class, args);
 
 //        HomeController homeController = (HomeController) applicationContext.getBean("homeController");
 //        homeController.hello();
@@ -26,9 +28,9 @@ public class RencontresEniApplication {
 //
 //        PersonBisServiceImpl personBisServiceImpl = (PersonBisServiceImpl) applicationContext.getBean("personBisServiceImpl");
 //        personBisServiceImpl.display();
-
-        PersonController personController = applicationContext.getBean(PersonController.class);
-        personController.displayPerson();
+//
+//        PersonController personController = applicationContext.getBean(PersonController.class);
+//        personController.displayPerson();
     }
 
 }
