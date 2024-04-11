@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymleaf.org"
+        lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TP ENI</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li class="navTitle">
+                    <a th:href="@{/}">Filmothèque</a>
+                </li>
+                <li>
+                    <a th:href="@{/movies}">Films</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <form action="#" method="#">
+            <fieldset>
+                <h1>Détail du film</h1>
+                <label for="genre">Genre : </label>
+                <input type="text" name="genre" id="genre" disabled
+                       th:value = "${movie.genre.title}">
+                <br>
+                <label for="year">Année : </label>
+                <input type="text" name="year" id="year" disabled
+                       th:value = "${movie.year}">
+                <br>
+                <label for="title">Titre : </label>
+                <input type="text" name="title" id="title" disabled
+                       th:value = "${movie.title}">
+                <br>
+                <label for="director">Réalisateur : </label>
+                <input type="text" name="director" id="director" disabled
+                       th:value = "${movie.director.firstName} + ' ' + ${movie.director.lastName}">
+                <br>
+                <label for="duration">Durée : </label>
+                <input type="number" name="duration" id="duration" disabled
+                       th:value = "${movie.duration}">
+                <br>
+                <label for="actors">Acteur(s) : </label>
+                <textarea id ="actors" name="actors" rows="5" cols="40" disabled
+                          th:text="${actors}">
+                </textarea>
+                <br>
+                <label for="synopsis">Synopsis</label>
+                <textarea id="synopsis" name="synopsis" disabled th:text = "${movie.synopsis}"></textarea>
+            </fieldset>
+        </form>
+
+    </main>
+</body>
+</html>

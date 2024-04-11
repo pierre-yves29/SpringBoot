@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymleaf.org"
+        lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TP ENI</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li class="navTitle">
+                    <a th:href="@{/}">Filmothèque</a>
+                </li>
+                <li>
+                    <a th:href="@{/movies}">Films</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>les films de l'ENI</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Genre</th>
+                    <th>Année</th>
+                    <th>Titre</th>
+                    <th>Réalisateur</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each = "movie : ${movies}">
+                    <td th:text = "${movie.genre.title}"></td>
+                    <td th:text = "${movie.year}"></td>
+                    <td th:text = "${movie.title}"></td>
+                    <td th:text = "${movie.director.firstName} + ' ' + ${movie.director.lastName}"></td>
+                    <td><a th:href = "@{'/movies/details?id=' + ${movie.id}}">Détails</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>

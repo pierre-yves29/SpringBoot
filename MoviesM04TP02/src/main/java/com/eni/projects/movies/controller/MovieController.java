@@ -6,11 +6,9 @@ import com.eni.projects.movies.bo.Participant;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -25,30 +23,34 @@ public class MovieController {
 
     @GetMapping("/details")
     public String displayMovie(
-            @RequestParam(name = "id", required = true) long movieId,
+            @RequestParam(name="id", required=true) int movieId,
             Model model
     ) {
         Movie movie = movieService.getMovieById(movieId);
 
-        StringBuilder sb = new StringBuilder();
+        StringBuilder stringBuilder = new StringBuilder();
 
-        for (Participant actor: movie.getActors()){
-            sb.append(String.format("- %s %s%n", actor.getFirstName(), actor.getLastName()));
+        for(Participant actor: movie.getActors()) {
+            stringBuilder
+                .append("- ")
+                .append(actor.getFirstName())
+                .append(" ")
+                .append(actor.getLastName())
+                .append("\n");
         }
 
         model.addAttribute("movie", movie);
-        model.addAttribute("actors", sb.toString());
-        return "/movies/details.html";
+        model.addAttribute("actors", stringBuilder.toString());
+        return "movies/details.html";
     }
 
     @GetMapping
     public String displayMovies(
             Model model
     ) {
-        List<Movie> movies = new ArrayList<>();
-        movies = movieService.getMovies();
+        List<Movie> movies = movieService.getMovies();
 
         model.addAttribute("movies", movies);
-        return "/movies/list.html";
+        return "movies/list.html";
     }
 }

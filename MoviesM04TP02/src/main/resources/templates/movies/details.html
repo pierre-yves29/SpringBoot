@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        lang="en"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>TP ENI</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li class="nav-title"><a th:href="@{/}">Filmothèque</a></li>
+                <li><a th:href="@{/movies}">Films</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <h1>Détails du film</h1>
+
+    <form action="#" method="">
+        <label for="genre">Genre :</label>
+        <input type="text" name="genre" id="genre" th:value="${movie.genre.title}" disabled>
+        <br>
+        <label for="year">Année :</label>
+        <input type="text" name="year" id="year" th:value="${movie.year}" disabled>
+        <br>
+        <label for="title">Titre :</label>
+        <input type="text" name="title" id="title" th:value="${movie.title}" disabled>
+        <br>
+        <label for="duration">Durée :</label>
+        <input type="number" name="duration" id="duration" th:value="${movie.duration}" disabled>
+        <br>
+        <label for="actors">Acteurs :</label>
+        <textarea id="actors" name="actors" th:text="${actors}" rows="10" cols="40" disabled></textarea>
+        <br>
+        <label for="synopsis">Synopsis :</label>
+        <textarea id="synopsis" name="synopsis" th:text="${movie.synopsis}" rows="10" cols="40" disabled></textarea>
+    </form>
+
+</body>
+</html>
