@@ -25,7 +25,7 @@ public class PersonBisServiceImpl implements PersonService {
     }
 
     @Override
-    public List<Person> getPersonsByZone(float latitude, float longitude) {
+    public List<Person> getPersonsByZone(float latitude, float longitude, float radius) {
         return List.of();
     }
 }

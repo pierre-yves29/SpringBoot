@@ -2,6 +2,8 @@ package com.eni.recontres.bll.impl;
 
 import com.eni.recontres.bll.PersonService;
 import com.eni.recontres.bo.Person;
+import net.sf.geographiclib.Geodesic;
+import net.sf.geographiclib.GeodesicData;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
@@ -24,8 +26,8 @@ public class PersonServiceImpl implements PersonService {
                 "Etalon bigouden. Touche à tout sauf à la coiffe",
                 "Masculin",
                 new ArrayList<>(),
-                1f,
-                1f
+                47.958689f,
+                -4.365432f
         );
 
         Person quentin = new Person(
@@ -35,8 +37,8 @@ public class PersonServiceImpl implements PersonService {
                 "Aime se déguiser en Batman",
                 "Masculin",
                 new ArrayList<>(),
-                2f,
-                2f
+                47.995537f,
+                -4.103790f
         );
 
         Person clea = new Person(
@@ -46,8 +48,8 @@ public class PersonServiceImpl implements PersonService {
                 "Fan d'IKEA",
                 "Féminin",
                 new ArrayList<>(),
-                2f,
-                2f
+                48.099998f,
+                -4.33333f
         );
 
         persons.add(arnaud);
@@ -66,9 +68,31 @@ public class PersonServiceImpl implements PersonService {
         return persons.stream().filter(person -> person.getId() == id).findFirst().orElse(null);
     }
 
-    public List<Person> getPersonsByZone(float latitude, float longitude){
+    public List<Person> getPersonsByZone(float latitude, float longitude, float radius){
+
         return persons.stream()
-                .filter(person -> person.getLatitude() == latitude && person.getLongitude() == longitude)
+                .filter(person -> isPersonInMyRadius(latitude, longitude, person.getLatitude(), person.getLongitude(),radius))
                 .toList();
+    }
+
+    private boolean isPersonInMyRadius(
+            float myLatitude,
+            float myLongitude,
+            float personLatitude,
+            float personLongitude,
+            float radius)
+    {
+        Geodesic geodesic = Geodesic.WGS84;
+
+        GeodesicData result = geodesic.Inverse(
+                myLatitude,
+                myLongitude,
+                personLatitude,
+                personLongitude
+        );
+        //get a distance in meters
+        double distance = result.s12;
+
+        return distance < radius;
     }
 }

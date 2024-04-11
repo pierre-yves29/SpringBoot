@@ -7,5 +7,5 @@ import java.util.List;
 public interface PersonService {
     List<Person> getPersons();
     Person getPersonById(long id);
-    List<Person> getPersonsByZone(float latitude, float longitude);
+    List<Person> getPersonsByZone(float latitude, float longitude, float radius);
 }

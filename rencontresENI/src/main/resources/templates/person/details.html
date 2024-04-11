@@ -1,12 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html
+        xmlns:th="http://www.thymleaf.org"
+        lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Profil d'Arnaud</title>
+    <title th:text="'Profil de ' + ${person.name}"></title>
+    <link rel="stylesheet" th:href="@{style.css}">
 </head>
 <body>
-    <h1>Arnaud</h1>
-    <h2>25 ans</h2>
-    <p>Etalon bigouden. Touche à tout sauf la coiffe</p>
+    <h1 th:text="${person.name}"></h1>
+    <h2 th:text="${age} + ' ans'"></h2>
+    <p th:text="${person.description}"></p>
+    <button>&#128151;</button>
+    <button>&#129314;</button>
 </body>
 </html>
