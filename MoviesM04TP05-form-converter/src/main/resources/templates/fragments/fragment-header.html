@@ -1,0 +1,16 @@
+<header xmlns:th="http://www.thymleaf.org" th:fragment="frag-header">
+    <nav>
+        <ul>
+            <li class="nav-title">
+                <img th:src="@{/images/logoFilmotheque.png}" class="logo" alt="Logo de filmothèque">
+                <a th:href="@{/}">Filmothèque</a>
+                <span th:if="${memberSession != null}" th:text="${memberSession.firstName}"></span>
+            </li>
+            <li class="film-header">
+                <a th:href="@{/movies}" >Films</a>
+                <a th:href="@{/movies/create}" >Créer</a>
+                <a th:href="@{/contexts}">Contextes</a>
+            </li>
+        </ul>
+    </nav>
+</header>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layouts/layout :: layout-main(
+        pageContent=~{:: .main-content},
+        title=~{:: .main-title}
+        )}">
+
+<title class="main-title">Liste des films</title>
+
+<main class = "main-content">
+    <h1>Les différent profils</h1>
+    <a th:each="member : ${members}" th:href="@{contexts/login(email= ${member.username})}">
+        <button th:text="${member.firstName}"></button>
+    </a>
+    <a th:href="@{contexts/logout}"><button>Déconnexion</button></a>
+
+</main>
+</html>

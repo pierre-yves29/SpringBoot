@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        th:replace="~{layouts/layout :: layout-main(
+            pageContent=~{:: .main-content},
+            title=~{:: .main-title}
+        )}"
+>
+<title class="main-title">Les profils autour de moi</title>
+
+<main class="main-content">
+    <h1>Les profils autour de moi</h1>
+    <div class="cards">
+        <div class="card" th:each="person: ${persons}">
+            <a th:href="@{'/persons/' + ${person.id}}" th:text="${person.name}"></a>
+            <p th:text="${person.description}"></p>
+            <button>&#128151;</button>
+            <button>&#129314;</button>
+        </div>
+    </div>
+    <p th:if="${#arrays.length(persons) == 0}">Pas de profils à proximité</p>
+</main>
+</html>
