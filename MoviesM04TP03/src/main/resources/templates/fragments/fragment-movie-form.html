@@ -1,0 +1,72 @@
+<form
+        xmlns:th="http://www.thymleaf.org"
+        th:fragment="frag-movie-form(action)"
+        th:action="@{${action}}"
+        method="POST"
+>
+    <div>
+        <label for="genre">Genre :</label>
+        <input
+                type="text"
+                name="genre"
+                id="genre"
+                th:value="${movie.genre.title}"
+                th:disabled="${#strings.isEmpty(action)}"
+        >
+    </div>
+    <br>
+    <div>
+        <label for="year">Année :</label>
+        <input
+                type="text"
+                name="year"
+                id="year"
+                th:value="${movie.year}"
+                th:disabled="${#strings.isEmpty(action)}"
+        >
+    </div>
+    <br>
+    <div>
+        <label for="title">Titre :</label>
+        <input
+                type="text"
+                name="title"
+                id="title"
+                th:value="${movie.title}"
+                th:disabled="${#strings.isEmpty(action)}"
+        >
+    </div>
+    <br>
+    <div>
+        <label for="duration">Durée :</label>
+        <input
+                type="number"
+                name="duration"
+                id="duration"
+                th:value="${movie.duration}"
+                th:disabled="${#strings.isEmpty(action)}"
+        >
+    </div>
+    <br>
+    <div class=container>
+        <label for="actors">Acteurs :</label>
+        <textarea
+                id="actors"
+                name="actors"
+                th:text="${actors}"
+                th:disabled="${#strings.isEmpty(action)}"
+        >
+        </textarea>
+    </div>
+    <br>
+    <div class=container>
+        <label for="synopsis">Synopsis :</label>
+        <textarea
+                id="synopsis"
+                name="synopsis"
+                th:text="${movie.synopsis}"
+                th:disabled="${#strings.isEmpty(action)}"
+        >
+        </textarea>
+    </div>
+</form>

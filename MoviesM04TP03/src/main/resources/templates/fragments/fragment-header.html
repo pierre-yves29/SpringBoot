@@ -1,0 +1,13 @@
+<header xmlns:th="http://www.thymleaf.org" th:fragment="frag-header">
+    <nav>
+        <ul>
+            <li class="nav-title">
+                <img th:src="@{/images/logoFilmotheque.png}" class="logo" alt="Logo de filmothèque">
+                <a th:href="@{/}">Filmothèque</a>
+            </li>
+            <li class="film-header">
+                <a th:href="@{/movies}" >Films</a>
+            </li>
+        </ul>
+    </nav>
+</header>

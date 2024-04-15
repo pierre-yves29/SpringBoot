@@ -1,0 +1,16 @@
+<!DOCTYPE>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layouts/layout :: layout-main(pageContent=~{:: .main-content},
+        title=~{:: .main-title}
+        )}">
+
+    <title class="main-title" th:text="'Profil de ' + ${person.name}"></title>
+
+    <main class="main-content">
+        <h1 th:text="${person.name}"></h1>
+        <h2 th:text="${age} + ' ans'"></h2>
+        <p th:text="${person.description}"></p>
+        <button>&#128151;</button>
+        <button>&#129314;</button>
+    </main>
+</html>
