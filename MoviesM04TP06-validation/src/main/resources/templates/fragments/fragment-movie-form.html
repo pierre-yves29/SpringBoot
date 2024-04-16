@@ -1,0 +1,155 @@
+<form
+        xmlns:th="http://www.thymleaf.org"
+        th:fragment="frag-movie-form(action)"
+        th:action="@{${action}}"
+        method="POST"
+        th:object="${movie}"
+>
+
+    <div>
+        <label
+                th:if="${#strings.isEmpty(action)}"
+                for="genre">Genre :</label>
+        <input
+                th:if="${#strings.isEmpty(action)}"
+                type="text"
+                name="genre"
+                id="genre"
+                th:value="${movie.genre.title}"
+                th:disabled="${#strings.isEmpty(action)}"
+        >
+    </div>
+    <div>
+        <label
+                th:if="${!#strings.isEmpty(action)}"
+                for="genreCreate">Genre :</label>
+        <select
+                th:if="${!#strings.isEmpty(action)}"
+                name="genreCreate"
+                id="genreCreate"
+                th:field="*{genre}"
+        >
+            <option
+                    th:each="genre : ${genres}"
+                    th:value="${genre.id}"
+                    th:text="${genre.title}"
+            >
+            </option>
+        </select>
+    </div>
+    <br>
+    <div>
+        <label for="year">Année :</label>
+        <input
+                type="text"
+                name="year"
+                id="year"
+                th:field="*{year}"
+                th:disabled="${#strings.isEmpty(action)}"
+        >
+    </div>
+    <br>
+    <div>
+        <label for="title">Titre :</label>
+        <input
+                type="text"
+                name="title"
+                id="title"
+                th:field="*{title}"
+                th:disabled="${#strings.isEmpty(action)}"
+        >
+    </div>
+    <br>
+    <div>
+        <label
+                th:if="${#strings.isEmpty(action)}"
+                for="director">Réalisateur :</label>
+        <input
+                th:if="${#strings.isEmpty(action)}"
+                type="text"
+                name="director"
+                id="director"
+                th:value="${movie.director.firstName} + ' ' + ${movie.director.lastName}"
+                th:disabled="${#strings.isEmpty(action)}"
+        >
+    </div>
+    <div>
+        <label
+                th:if="${!#strings.isEmpty(action)}"
+                for="directorCreate">Réalisateur :</label>
+        <select
+                th:if="${!#strings.isEmpty(action)}"
+                name="directorCreate"
+                id="directorCreate"
+                th:field="*{director}"
+                th:disabled="${#strings.isEmpty(action)}"
+        >
+            <option
+                    th:each="participant : ${participants}"
+                    th:value="${participant.id}"
+                    th:text="${participant.firstName} + ' ' + ${participant.lastName}"
+            >
+            </option>
+        </select>
+    </div>
+    <br>
+    <div>
+        <label for="duration">Durée :</label>
+        <input
+                type="number"
+                name="duration"
+                id="duration"
+                th:field="*{duration}"
+                th:disabled="${#strings.isEmpty(action)}"
+        >
+    </div>
+    <br>
+    <div class=container>
+        <label
+                th:if="${#strings.isEmpty(action)}"
+                for="actors">Acteurs :
+        </label>
+        <textarea
+                th:if="${#strings.isEmpty(action)}"
+                id="actors"
+                name="actors"
+                th:text="${actors}"
+                th:disabled="${#strings.isEmpty(action)}"
+        >
+        </textarea>
+    </div>
+    <div class="container">
+        <label
+                th:if="${!#strings.isEmpty(action)}"
+                for="actorsCreate">Acteurs :
+        </label>
+        <select
+                th:if="${!#strings.isEmpty(action)}"
+                name="actorsCreate"
+                id="actorsCreate"
+                th:field="*{actors}"
+                th:disabled="${#strings.isEmpty(action)}"
+                multiple
+        >
+            <option
+                    th:each="participant: ${participants}"
+                    th:value="${participant.id}"
+                    th:text="${participant.firstName} + ' ' + ${participant.lastName}"
+            >
+            </option>
+        </select>
+    </div>
+    <br>
+    <div class=container>
+        <label for="synopsis">Synopsis :</label>
+        <textarea
+                id="synopsis"
+                name="synopsis"
+                th:field="*{synopsis}"
+                th:disabled="${#strings.isEmpty(action)}"
+        >
+        </textarea>
+    </div>
+
+    <button th:if="${!#strings.isEmpty(action)}" type="submit">Enregistrer</button>
+</form>

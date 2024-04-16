@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layouts/layout :: layout-main(
+        pageContent=~{:: .main-content},
+        title=~{:: .main-title}
+        )}">
+
+<title class="main-title">Créer</title>
+
+<main class="main-content">
+    <h1>Création d'un film</h1>
+
+    <form th:replace="~{fragments/fragment-movie-form :: frag-movie-form('/movies/create')}"></form>
+
+</main>
+
+</html>

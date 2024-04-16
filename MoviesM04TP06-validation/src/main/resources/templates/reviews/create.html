@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layouts/layout :: layout-main(
+        pageContent=~{:: .main-content},
+        title=~{:: .main-title}
+        )}">
+
+    <title class="main-title">Avis</title>
+
+    <main class="main-content">
+        <h1 th:text="'Ajouter un avis au film : ' + ${movie.title}"></h1>
+        <form th:replace="~{fragments/fragment-review-form :: frag-review-form('/reviews/create?idMovie=' + ${movie.id})}"></form>
+    </main>
+
+</html>

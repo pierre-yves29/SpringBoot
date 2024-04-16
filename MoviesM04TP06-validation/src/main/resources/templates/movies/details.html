@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layouts/layout :: layout-main(
+        pageContent=~{:: .main-content},
+        title=~{:: .main-title}
+        )}">
+
+<title class="main-title" th:text="'détail de ' + ${movie.title}"></title>
+
+<main class="main-content">
+    <h1>Détails du film</h1>
+    <form th:replace="~{fragments/fragment-movie-form :: frag-movie-form(~{})}"></form>
+    <h2>Avis</h2>
+    <p
+            th:if="${!#lists.isEmpty(movie.reviews)}"
+            th:each="review : ${reviews}"
+            th:text="'[' + ${review.grade} + '] - ' + ${review.comments} + ' (' + ${review.member.firstName} + ' )' ">
+
+    </p>
+    <p th:if="${#lists.isEmpty(movie.reviews)}">
+        il n'y a pas d'avis pour ce film
+    </p>
+</main>
+
+</html>

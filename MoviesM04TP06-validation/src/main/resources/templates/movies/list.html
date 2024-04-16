@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layouts/layout :: layout-main(
+        pageContent=~{:: .main-content},
+        title=~{:: .main-title}
+        )}">
+
+    <title class="main-title">Liste des films</title>
+
+    <main class = "main-content">
+        <h1>Les films de l'ENI</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Genre</th>
+                    <th>Année</th>
+                    <th>Titre</th>
+                    <th>Réalisateur</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="movie: ${movies}">
+                    <td th:text="${movie.genre.title}"></td>
+                    <td th:text="${movie.year}"></td>
+                    <td th:text="${movie.title}"></td>
+                    <td th:text="${movie.director.firstName} + ' ' + ${movie.director.lastName}"></td>
+                    <td>
+                        <a th:href="@{/movies/details(id=${movie.id})}"><button>Détails</button></a>
+                        <a
+                                th:if="${memberSession != null && memberSession.id > 0}"
+                                th:href="@{/reviews/create(idMovie=${movie.id})}"><button>Avis</button></a>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+</html>
