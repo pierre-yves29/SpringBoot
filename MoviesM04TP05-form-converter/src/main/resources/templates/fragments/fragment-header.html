@@ -8,7 +8,9 @@
             </li>
             <li class="film-header">
                 <a th:href="@{/movies}" >Films</a>
-                <a th:href="@{/movies/create}" >Créer</a>
+                <a
+                        th:if="${memberSession != null && memberSession.isAdmin == true}"
+                        th:href="@{/movies/create}" >Créer</a>
                 <a th:href="@{/contexts}">Contextes</a>
             </li>
         </ul>

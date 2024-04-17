@@ -6,6 +6,7 @@
         th:object="${movie}"
 >
 
+    <p th:if="${#fields.hasErrors('*')}" class="error">Attention : Veuillez vérifier vos champs</p>
     <div>
         <label
                 th:if="${#strings.isEmpty(action)}"
@@ -37,6 +38,7 @@
             </option>
         </select>
     </div>
+    <div th:replace="~{fragments/fragment-error :: frag-error('genre')}"></div>
     <br>
     <div>
         <label for="year">Année :</label>
@@ -48,6 +50,7 @@
                 th:disabled="${#strings.isEmpty(action)}"
         >
     </div>
+    <div th:replace="~{fragments/fragment-error :: frag-error('year')}"></div>
     <br>
     <div>
         <label for="title">Titre :</label>
@@ -59,11 +62,10 @@
                 th:disabled="${#strings.isEmpty(action)}"
         >
     </div>
+    <div th:replace="~{fragments/fragment-error :: frag-error('title')}"></div>
     <br>
     <div>
-        <label
-                th:if="${#strings.isEmpty(action)}"
-                for="director">Réalisateur :</label>
+        <label for="director">Réalisateur :</label>
         <input
                 th:if="${#strings.isEmpty(action)}"
                 type="text"
@@ -72,11 +74,7 @@
                 th:value="${movie.director.firstName} + ' ' + ${movie.director.lastName}"
                 th:disabled="${#strings.isEmpty(action)}"
         >
-    </div>
-    <div>
-        <label
-                th:if="${!#strings.isEmpty(action)}"
-                for="directorCreate">Réalisateur :</label>
+
         <select
                 th:if="${!#strings.isEmpty(action)}"
                 name="directorCreate"
@@ -92,6 +90,7 @@
             </option>
         </select>
     </div>
+    <div th:replace="~{fragments/fragment-error :: frag-error('director')}"></div>
     <br>
     <div>
         <label for="duration">Durée :</label>
@@ -103,12 +102,10 @@
                 th:disabled="${#strings.isEmpty(action)}"
         >
     </div>
+    <div th:replace="~{fragments/fragment-error :: frag-error('duration')}"></div>
     <br>
     <div class=container>
-        <label
-                th:if="${#strings.isEmpty(action)}"
-                for="actors">Acteurs :
-        </label>
+        <label for="actors">Acteurs : </label>
         <textarea
                 th:if="${#strings.isEmpty(action)}"
                 id="actors"
@@ -117,12 +114,7 @@
                 th:disabled="${#strings.isEmpty(action)}"
         >
         </textarea>
-    </div>
-    <div class="container">
-        <label
-                th:if="${!#strings.isEmpty(action)}"
-                for="actorsCreate">Acteurs :
-        </label>
+
         <select
                 th:if="${!#strings.isEmpty(action)}"
                 name="actorsCreate"
@@ -150,6 +142,7 @@
         >
         </textarea>
     </div>
+    <div th:replace="~{fragments/fragment-error :: frag-error('synopsis')}"></div>
 
     <button th:if="${!#strings.isEmpty(action)}" type="submit">Enregistrer</button>
 </form>

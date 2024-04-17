@@ -25,7 +25,13 @@
                     <td th:text="${movie.year}"></td>
                     <td th:text="${movie.title}"></td>
                     <td th:text="${movie.director.firstName} + ' ' + ${movie.director.lastName}"></td>
-                    <td><a th:href="@{/movies/details(id=${movie.id})}"><button>Détails</button></a></td>
+                    <td>
+                        <a th:href="@{/movies/details(id=${movie.id})}"><button>Détails</button></a>
+                        <a
+                                th:if="${memberSession != null && memberSession.id > 0}"
+                                th:href="@{/reviews/create(idMovie=${movie.id})}"><button>Avis</button></a>
+
+                    </td>
                 </tr>
             </tbody>
         </table>

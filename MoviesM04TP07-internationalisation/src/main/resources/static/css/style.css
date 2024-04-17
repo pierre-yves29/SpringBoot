@@ -1,0 +1,135 @@
+* {
+    margin: 0;
+}
+
+body{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header{
+    margin-bottom: 10px;
+    background-color: grey;
+}
+
+.main-content{
+    padding: 0 10px;
+}
+
+.logo{
+    height: 50px;
+    width: 50px;
+}
+
+.film-header{
+    display: flex;
+    align-items: center;
+}
+
+.film-header > a{
+    margin: 0 10px;
+    font-size: 20px;
+}
+
+footer{
+    margin-top: auto;
+    background-color: grey;
+    padding: 1rem;
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+
+tbody tr:nth-child(even) {
+    background-color: lightgray;
+}
+
+table {
+    border-collapse: collapse;
+    margin-left: 10px;
+}
+
+td, th {
+    border: black 1px solid;
+    padding: 4px;
+}
+
+th {
+    background-color: black;
+    color: white;
+    border: gray 1px solid;
+}
+
+nav > ul {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 0;
+    border-bottom: 1px solid gray;
+    box-shadow: 0px 1px 3px gray;
+}
+
+nav > ul > li {
+    list-style-type: none;
+    padding: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+form{
+    padding: 5px;
+    background-color: aliceblue;
+    border-radius: 5px;
+}
+
+label{
+    display: inline-block;
+    width: 10vw;
+    height: 1.2rem;
+}
+
+.container{
+    display: flex;
+    align-items: center;
+}
+textarea, input{
+    width: 20vw;
+}
+
+textarea {
+    resize: none;
+    height: 10vh;
+}
+
+input{
+    padding: 3px;
+}
+
+.nav-title {
+    font-size: 20px;
+}
+
+#main-title {
+    text-align: center;
+    margin-top: 100px;
+}
+
+.error{
+    background-color: lightcoral;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 3px 5px;
+    margin: 3px 0;
+    border-radius: 3px;
+}
+
+.flag{
+    height: 20px;
+    width: 30px;
+}

@@ -1,9 +1,7 @@
 package com.eni.projects.movies.controller;
 
 import com.eni.projects.movies.bll.MovieService;
-import com.eni.projects.movies.bo.Genre;
-import com.eni.projects.movies.bo.Movie;
-import com.eni.projects.movies.bo.Participant;
+import com.eni.projects.movies.bo.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -42,7 +40,39 @@ public class MovieController {
 
         model.addAttribute("movie", movie);
         model.addAttribute("actors", stringBuilder.toString());
+
         return "movies/details.html";
+    }
+
+    @GetMapping("/create")
+    public String displayForm(
+            Model model
+    ){
+        Movie movie = new Movie();
+        Genre genre = new Genre();
+        movie.setGenre(genre);
+
+        List<Genre> genres = movieService.getGenres();
+        List<Participant> participants = movieService.getParticipants();
+
+        model.addAttribute("movie", movie);
+        model.addAttribute("genres", genres);
+        model.addAttribute("participants", participants);
+        return "movies/create.html";
+    }
+
+    @PostMapping("/create")
+    public String create(
+            @ModelAttribute("memberSession") Member memberSession,
+            @ModelAttribute("movie") Movie movie
+    ){
+        if(memberSession.isAdmin()){
+            System.out.println(movie);
+            movieService.createMovie(movie);
+            return "redirect:/movies";
+        }
+
+        return "redirect:/contexts";
     }
 
     @GetMapping
@@ -55,13 +85,14 @@ public class MovieController {
         return "movies/list.html";
     }
 
-    @GetMapping("/create")
-    public String createMovie(){
-        return "movies/create.html";
-    }
-
     @ModelAttribute("genresSession")
     public List<Genre> getGenres(){
-        return movieService.getGenres();
+        List<Genre> genres = movieService.getGenres();
+        return genres;
+    }
+
+    @ModelAttribute("memberSession")
+    public Member memberSession() {
+        return new Member();
     }
 }

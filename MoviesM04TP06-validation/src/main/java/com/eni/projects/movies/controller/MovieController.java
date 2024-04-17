@@ -2,8 +2,10 @@ package com.eni.projects.movies.controller;
 
 import com.eni.projects.movies.bll.MovieService;
 import com.eni.projects.movies.bo.*;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -64,12 +66,23 @@ public class MovieController {
     @PostMapping("/create")
     public String create(
             @ModelAttribute("memberSession") Member memberSession,
-            @ModelAttribute("movie") Movie movie
+            @Valid @ModelAttribute("movie") Movie movie,
+            BindingResult bindingResult,
+            Model model
     ){
         if(memberSession.isAdmin()){
-            System.out.println(movie);
-            movieService.createMovie(movie);
-            return "redirect:/movies";
+            if(bindingResult.hasErrors()){
+                List<Genre> genres = movieService.getGenres();
+                List<Participant> participants = movieService.getParticipants();
+
+                model.addAttribute("genres", genres);
+                model.addAttribute("participants", participants);
+
+                return "movies/create.html";
+            } else {
+                movieService.createMovie(movie);
+                return "redirect:/movies";
+            }
         }
 
         return "redirect:/contexts";

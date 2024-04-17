@@ -126,6 +126,7 @@ public class Movie {
         sb.append(", year=").append(year);
         sb.append(", duration=").append(duration);
         sb.append(", synopsis='").append(synopsis).append('\'');
+//        sb.append(",acteurs='").append(actors).append('\'');
         sb.append('}');
         return sb.toString();
     }

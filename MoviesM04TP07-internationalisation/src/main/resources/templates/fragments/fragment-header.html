@@ -1,0 +1,27 @@
+<header xmlns:th="http://www.thymleaf.org" th:fragment="frag-header">
+    <nav>
+        <ul>
+            <li class="nav-title">
+                <img th:src="@{/images/logoFilmotheque.png}" class="logo" alt="Logo de filmothèque">
+                <a th:href="@{/}" th:text="#{nom-application}"></a>
+                <span th:if="${memberSession != null}" th:text="${memberSession.firstName}"></span>
+            </li>
+            <li class="film-header">
+                <a th:href="@{/movies}" th:text="#{frag-entete.a.films}"></a>
+                <a
+                        th:if="${memberSession != null && memberSession.isAdmin == true}"
+                        th:href="@{/movies/create}"
+                        th:text="#{frag-entete.a.films.creer}"
+                >
+                </a>
+                <a th:href="@{/contexts}" th:text="#{frag-entete.a.contexte}"></a>
+                <a th:href="@{/(language=fr)}">
+                    <img src="/images/French.webp" alt="Français" class="flag">
+                </a>
+                <a th:href="@{/(language=en)}">
+                    <img src="/images/English.webp" alt="Anglais" class="flag">
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>

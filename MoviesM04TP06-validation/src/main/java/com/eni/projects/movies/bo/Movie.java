@@ -1,5 +1,7 @@
 package com.eni.projects.movies.bo;
 
+import jakarta.validation.constraints.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -11,13 +13,29 @@ import java.util.Objects;
  */
 public class Movie {
     private long id;
+
+    @NotBlank(message = "Le titre ne doit pas être vide")
+    @Size(max = 250, message = "Le titre doit faire {max} caractères maximum")
     private String title;
+
+    @NotNull
+    @Min(value = 1900, message = "La date ne peut pas être antérieure à {value}")
     private int year;
+
+    @Min(value = 1, message  = "la durée doit être d'au moins {value} minute(s)")
     private int duration;
+
+    @Size(min = 20, max = 250, message = "Le synopsis doit faire entre {min} et {max} caractères")
     private String synopsis;
+
+    @NotNull
     private Genre genre;
+
     private List<Review> reviews = new ArrayList<>();
+
+    @NotNull
     private Participant director;
+
     private List<Participant> actors = new ArrayList<>();
 
     public Movie() {

@@ -1,0 +1,47 @@
+<form
+        xmlns:th="http://www.thymleaf.org"
+        th:fragment="frag-review-form(action)"
+        th:action="@{${action}}"
+        method="POST"
+        th:object="${review}"
+>
+    <div>
+        <label
+                th:text="#{view-avis-form.note}"
+                for="grade"
+        >
+        </label>
+        <input
+                type="number"
+                name="grade"
+                id="grade"
+                min="0"
+                max="5"
+                required
+                th:disabled="${#strings.isEmpty(action)}"
+                th:field="*{grade}"
+        >
+    </div>
+    <br>
+    <div class="container">
+        <label
+                th:text="#{view-avis-form.commentaire}"
+                for="comments"
+        >
+        </label>
+        <textarea
+                name="comments"
+                id="comments"
+                required
+                th:disabled="${#strings.isEmpty(action)}"
+                th:field="*{comments}"
+        ></textarea>
+    </div>
+    <button
+            th:if="${!#strings.isEmpty(action)}"
+            type="submit"
+            th:text="#{view-avis-form.enregistrer}"
+    >
+    </button>
+
+</form>

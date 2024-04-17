@@ -8,14 +8,10 @@
 <title class="main-title">Créer</title>
 
 <main class="main-content">
-    <h1>Création d'un film (WIP)</h1>
-    <form action="#" method="POST">
-        <label for="genre">Genre : </label>
-        <select name="genre" id="genre">
-            <option value="">--Choisissez un genre--</option>
-            <option th:each="genre : ${genresSession}" th:value="${genre.id}" th:text="${genre.title}"></option>
-        </select>
-    </form>
+    <h1>Création d'un film</h1>
+
+    <form th:replace="~{fragments/fragment-movie-form :: frag-movie-form('/movies/create')}"></form>
+
 </main>
 
 </html>
