@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        th:replace="~{layouts/layout :: layout-main(
+            pageContent=~{:: .main-content},
+            title=~{:: .main-title}
+        )}"
+>
+<title class="main-title">Home</title>
+
+<h1 class="main-content" th:text="#{welcome}"></h1>
+
+</html>

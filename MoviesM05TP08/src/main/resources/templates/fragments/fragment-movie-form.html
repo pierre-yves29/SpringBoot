@@ -1,0 +1,174 @@
+<form
+        xmlns:th="http://www.thymleaf.org"
+        th:fragment="frag-movie-form(action)"
+        th:action="@{${action}}"
+        method="POST"
+        th:object="${movie}"
+>
+
+    <p th:if="${#fields.hasErrors('*')}" class="error" th:text="#{frag-errors.h2}"></p>
+    <div>
+        <label
+                th:text="#{frag-film-form.genre}"
+                for="genre"
+        >
+        </label>
+        <input
+                th:if="${#strings.isEmpty(action)}"
+                type="text"
+                name="genre"
+                id="genre"
+                th:value="${movie.genre.title}"
+                th:disabled="${#strings.isEmpty(action)}"
+        >
+        <select
+                th:if="${!#strings.isEmpty(action)}"
+                name="genreCreate"
+                id="genreCreate"
+                th:field="*{genre}"
+        >
+            <option
+                    th:each="genre : ${genres}"
+                    th:value="${genre.id}"
+                    th:text="${genre.title}"
+            >
+            </option>
+        </select>
+    </div>
+    <div th:replace="~{fragments/fragment-error :: frag-error('genre')}"></div>
+    <br>
+    <div>
+        <label
+                th:text="#{frag-film-form.annee}"
+                for="year"
+        >
+        </label>
+        <input
+                type="text"
+                name="year"
+                id="year"
+                th:field="*{year}"
+                th:disabled="${#strings.isEmpty(action)}"
+        >
+    </div>
+    <div th:replace="~{fragments/fragment-error :: frag-error('year')}"></div>
+    <br>
+    <div>
+        <label
+                th:text="#{frag-film-form.titre}"
+                for="title"
+        >
+        </label>
+        <input
+                type="text"
+                name="title"
+                id="title"
+                th:field="*{title}"
+                th:disabled="${#strings.isEmpty(action)}"
+        >
+    </div>
+    <div th:replace="~{fragments/fragment-error :: frag-error('title')}"></div>
+    <br>
+    <div>
+        <label
+                th:text="#{frag-film-form.realisateur}"
+                for="director"
+        >
+        </label>
+        <input
+                th:if="${#strings.isEmpty(action)}"
+                type="text"
+                name="director"
+                id="director"
+                th:value="${movie.director.firstName} + ' ' + ${movie.director.lastName}"
+                th:disabled="${#strings.isEmpty(action)}"
+        >
+
+        <select
+                th:if="${!#strings.isEmpty(action)}"
+                name="directorCreate"
+                id="directorCreate"
+                th:field="*{director}"
+                th:disabled="${#strings.isEmpty(action)}"
+        >
+            <option
+                    th:each="participant : ${participants}"
+                    th:value="${participant.id}"
+                    th:text="${participant.firstName} + ' ' + ${participant.lastName}"
+            >
+            </option>
+        </select>
+    </div>
+    <div th:replace="~{fragments/fragment-error :: frag-error('director')}"></div>
+    <br>
+    <div>
+        <label
+                th:text="#{frag-film-form.duree}"
+                for="duration"
+        >
+        </label>
+        <input
+                type="number"
+                name="duration"
+                id="duration"
+                th:field="*{duration}"
+                th:disabled="${#strings.isEmpty(action)}"
+        >
+    </div>
+    <div th:replace="~{fragments/fragment-error :: frag-error('duration')}"></div>
+    <br>
+    <div class=container>
+        <label
+                th:text="#{frag-film-form.acteurs}"
+                for="actors"
+        >
+        </label>
+        <textarea
+                th:if="${#strings.isEmpty(action)}"
+                id="actors"
+                name="actors"
+                th:text="${actors}"
+                th:disabled="${#strings.isEmpty(action)}"
+        >
+        </textarea>
+
+        <select
+                th:if="${!#strings.isEmpty(action)}"
+                name="actorsCreate"
+                id="actorsCreate"
+                th:field="*{actors}"
+                th:disabled="${#strings.isEmpty(action)}"
+                multiple
+        >
+            <option
+                    th:each="participant: ${participants}"
+                    th:value="${participant.id}"
+                    th:text="${participant.firstName} + ' ' + ${participant.lastName}"
+            >
+            </option>
+        </select>
+    </div>
+    <br>
+    <div class=container>
+        <label
+                th:text="#{frag-film-form.synopsis}"
+                for="synopsis"
+        >
+        </label>
+        <textarea
+                id="synopsis"
+                name="synopsis"
+                th:field="*{synopsis}"
+                th:disabled="${#strings.isEmpty(action)}"
+        >
+        </textarea>
+    </div>
+    <div th:replace="~{fragments/fragment-error :: frag-error('synopsis')}"></div>
+
+    <button
+            th:if="${!#strings.isEmpty(action)}"
+            type="submit"
+            th:text="#{frag-film-form.enregistrer}"
+    >
+    </button>
+</form>

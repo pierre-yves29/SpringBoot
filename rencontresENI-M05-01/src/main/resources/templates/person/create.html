@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        th:replace="~{layouts/layout :: layout-main(
+            pageContent=~{:: .main-content},
+            title=~{:: .main-title}
+        )}"
+>
+<title class="main-title">Création d'un profil</title>
+
+<main class="main-content">
+    <h1>Création d'un profil</h1>
+    <form
+            method="post"
+            th:object="${person}"
+            th:action="@{/persons/create}"
+    >
+        <p th:if="${#fields.hasErrors('*')}" class="error">Vérifiez les champs</p>
+        <label for="name">Nom : </label>
+        <input type="text" id="name" th:field="*{name}">
+        <div th:replace="~{fragments/fragment-error :: frag-error('name')}"></div>
+        <br>
+        <label for="birthdate">Date de naissance : </label>
+        <input type="date" id="birthdate" th:field="*{birthdate}">
+        <div th:replace="~{fragments/fragment-error :: frag-error('birthdate')}"></div>
+        <br>
+        <label for="description">Description : </label>
+        <textarea id="description" th:field="*{description}"></textarea>
+        <div th:replace="~{fragments/fragment-error :: frag-error('description')}"></div>
+        <br>
+        <label for="gender">Genre :</label>
+        <select name="gender" id="gender">
+            <option value="">--Choisissez un genre--</option>
+            <option th:each="preference: ${preferencesSession}" th:value="${preference.id}" th:text="${preference.label}"></option>
+        </select>
+
+        <div th:replace="~{fragments/fragment-error :: frag-error('gender')}"></div>
+        <br>
+        <label for="preferences">Préférences :</label>
+        <select name="preferences" id="preferences" multiple>
+            <option value="">--Choisissez vos préférences--</option>
+            <option th:each="preference: ${preferencesSession}" th:value="${preference.id}" th:text="${preference.label}"></option>
+        </select>
+        <div th:replace="~{fragments/fragment-error :: frag-error('preferences')}"></div>
+        <br>
+        <label for="latitude">Latitude : </label>
+        <input type="number" id="latitude" th:field="*{latitude}">
+        <div th:replace="~{fragments/fragment-error :: frag-error('latitude')}"></div>
+        <br>
+        <label for="longitude">Longitude : </label>
+        <input type="number" id="longitude" th:field="*{longitude}">
+        <div th:replace="~{fragments/fragment-error :: frag-error('longitude')}"></div>
+        <br>
+        <button>Enregistrer</button>
+    </form>
+</main>
+</html>
