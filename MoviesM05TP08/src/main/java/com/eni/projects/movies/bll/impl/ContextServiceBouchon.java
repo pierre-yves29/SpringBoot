@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@Profile("dev")
 public class ContextServiceBouchon implements ContextService {
 	// Liste des membres
 	private static List<Member> lstMembers;

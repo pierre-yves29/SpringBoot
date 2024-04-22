@@ -125,8 +125,8 @@
         </label>
         <textarea
                 th:if="${#strings.isEmpty(action)}"
-                id="actors"
-                name="actors"
+                id="actorsDisplay"
+                name="actorsDisplay"
                 th:text="${actors}"
                 th:disabled="${#strings.isEmpty(action)}"
         >
@@ -134,9 +134,8 @@
 
         <select
                 th:if="${!#strings.isEmpty(action)}"
-                name="actorsCreate"
-                id="actorsCreate"
-                th:field="*{actors}"
+                name="actors"
+                id="actors"
                 th:disabled="${#strings.isEmpty(action)}"
                 multiple
         >

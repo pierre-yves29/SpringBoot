@@ -3,6 +3,7 @@ package com.eni.rencontres.bll.impl;
 import com.eni.rencontres.bll.PersonService;
 import com.eni.rencontres.bo.Person;
 import com.eni.rencontres.bo.Preference;
+import com.eni.rencontres.dal.PersonDAO;
 import net.sf.geographiclib.Geodesic;
 import net.sf.geographiclib.GeodesicData;
 import org.springframework.context.annotation.Primary;
@@ -16,63 +17,25 @@ import java.util.List;
 @Primary
 public class PersonServiceImpl implements PersonService {
 
-    private List<Person> persons = new ArrayList<>();
+    private PersonDAO personDAO;
 
-    public PersonServiceImpl() {
-        Preference male = new Preference("M", "Masculin");
-        Preference female = new Preference("F", "Féminin");
-
-        Person arnaud = new Person(
-                1,
-                "Arnaud",
-                LocalDate.parse("1998-08-19"),
-                "Etalon bigouden. Touche à tout sauf la coiffe.",
-                male,
-                new ArrayList<>(),
-                47.958689f,
-                -4.365432f
-        );
-
-        Person quentin = new Person(
-                2,
-                "Quentin",
-                LocalDate.parse("1989-01-28"),
-                "Aime se déguise en Batman. Recherche sa Batgirl.",
-                male,
-                new ArrayList<>(),
-                47.995537f,
-                -4.103790f
-        );
-
-        Person clea = new Person(
-                3,
-                "Cléa",
-                LocalDate.parse("1997-06-15"),
-                "Fan d'IKEA.",
-                female,
-                new ArrayList<>(),
-                48.099998f,
-                -4.33333f
-        );
-
-        persons.add(arnaud);
-        persons.add(quentin);
-        persons.add(clea);
+    public PersonServiceImpl(PersonDAO personDAO) {
+        this.personDAO = personDAO;
     }
 
     @Override
     public List<Person> getPersons() {
-        return persons;
+        return personDAO.findAll();
     }
 
     @Override
     public Person getPersonById(long id) {
-        return persons.stream().filter(person -> person.getId() == id).findFirst().orElse(null);
+        return personDAO.read(id);
     }
 
     @Override
     public List<Person> getPersonsByZone(float latitude, float longitude, float radius) {
-
+        List<Person> persons = getPersons();
         return persons.stream()
             .filter(
                 person -> isPersonInMyRadius(latitude, longitude, person.getLatitude(), person.getLongitude(), radius)
@@ -82,7 +45,7 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public void create(Person person) {
-        persons.add(person);
+        personDAO.create(person);
     }
 
     private boolean isPersonInMyRadius(

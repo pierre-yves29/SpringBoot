@@ -2,6 +2,7 @@ package com.eni.projects.movies.controller;
 
 import com.eni.projects.movies.bll.MovieService;
 import com.eni.projects.movies.bo.*;
+import com.eni.projects.movies.dal.ReviewDAO;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,10 +17,15 @@ import java.util.List;
 public class MovieController {
 
     private MovieService movieService;
+    private ReviewDAO reviewDAO;
 
-    public MovieController(MovieService movieService) {
+    public MovieController(
+            MovieService movieService,
+            ReviewDAO reviewDAO
+    ) {
 
         this.movieService = movieService;
+        this.reviewDAO = reviewDAO;
     }
 
     @GetMapping("/details")
@@ -28,6 +34,8 @@ public class MovieController {
             Model model
     ) {
         Movie movie = movieService.getMovieById(movieId);
+        List<Review> reviews = reviewDAO.findByFilm(movie.getId());
+        movie.setReviews(reviews);
 
         StringBuilder stringBuilder = new StringBuilder();
 
@@ -40,7 +48,6 @@ public class MovieController {
                 .append("\n");
         }
 
-        System.out.println(movie);
         model.addAttribute("movie", movie);
         model.addAttribute("actors", stringBuilder.toString());
 

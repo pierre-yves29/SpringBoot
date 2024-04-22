@@ -10,9 +10,12 @@
 
 <main class="main-content">
     <h1 th:text="${person.name}"></h1>
-    <h2 th:text="${age} + ' ans'"></h2>
-    <p th:text="${person.description}"></p>
-    <button>&#128151;</button>
-    <button>&#129314;</button>
+    <div class="display-person">
+        <h2 th:text="${age} + ' ans'"></h2>
+        <p th:text="${person.description}"></p>
+        <p th:text="${person.gender.label}"></p>
+        <button>&#128151;</button>
+        <button>&#129314;</button>
+    </div>
 </main>
 </html>

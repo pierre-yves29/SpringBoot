@@ -112,12 +112,10 @@ public class Movie {
         return reviews;
     }
 
+    public void setReviews(List<Review> reviews){this.reviews = reviews; }
+
     public void removeReview(Review review) {
         reviews.remove(review);
-    }
-
-    public Participant getDirector() {
-        return director;
     }
 
     public void addActor(Participant actor) {
@@ -132,6 +130,12 @@ public class Movie {
         return actors;
     }
 
+    public void setActors(List<Participant> actors){this.actors = actors; }
+
+    public Participant getDirector() {
+        return director;
+    }
+
     public void setDirector(Participant director) {
         this.director = director;
     }
@@ -144,7 +148,6 @@ public class Movie {
         sb.append(", year=").append(year);
         sb.append(", duration=").append(duration);
         sb.append(", synopsis='").append(synopsis).append('\'');
-        sb.append(",review='").append(reviews).append('\'');
         sb.append('}');
         return sb.toString();
     }

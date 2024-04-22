@@ -46,6 +46,10 @@ nav > ul > li {
     padding-right: 20px;
 }
 
+.display-person{
+    padding: 0 10px;
+}
+
 .cards {
     display: flex;
     justify-content: space-around;

@@ -96,7 +96,6 @@ public class PersonController {
     @ModelAttribute("preferencesSession")
     public List<Preference> getPreferences() {
         List<Preference> preferences = preferenceService.getPreferences();
-        System.out.println(preferences);
         return preferences;
     }
 }

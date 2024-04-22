@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@Profile("dev")
+@Profile("non")
 public class MovieServiceBouchon implements MovieService {
     // Attributs statiques pour gérer les valeurs à afficher et simuler les données
     // en base
@@ -30,6 +30,7 @@ public class MovieServiceBouchon implements MovieService {
     };
 
     public MovieServiceBouchon() {
+        System.out.println("MovieServiceBouchon");
         simulationCoucheDALetDB();
     }
 
@@ -74,6 +75,7 @@ public class MovieServiceBouchon implements MovieService {
     @Override
     public void createMovie(Movie movie) {
         // Sauvegarde du film
+        System.out.println("MovieServiceBouchon");
         movie.setId(indexMovies++);
         lstMovies.add(movie);
     }
