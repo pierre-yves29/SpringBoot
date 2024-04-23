@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layouts/layout :: layout-main(
+        pageContent=~{:: .main-content},
+        title=~{:: .main-title}
+        )}">
+
+    <title class="main-title" th:text="#{view-films.title}"></title>
+
+    <main class = "main-content">
+        <h1 th:text="#{view-films.h1}"></h1>
+        <table>
+            <thead>
+                <tr>
+                    <th th:text="#{view-films.th.genre}"></th>
+                    <th th:text="#{view-films.th.annee}"></th>
+                    <th th:text="#{view-films.th.titre}"></th>
+                    <th th:text="#{view-films.th.realisateur}"></th>
+                    <th th:text="#{view-films.th.actions}"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="movie: ${movies}">
+                    <td th:text="${movie.genre.title}"></td>
+                    <td th:text="${movie.year}"></td>
+                    <td th:text="${movie.title}"></td>
+                    <td th:text="${movie.director.firstName} + ' ' + ${movie.director.lastName}"></td>
+                    <td>
+                        <a th:href="@{/movies/details(id=${movie.id})}">
+                            <button th:text="#{view-films.th.actions.detail}"></button>
+                        </a>
+                        <a
+                                th:if="${memberSession != null && memberSession.id > 0}"
+                                th:href="@{/reviews/create(idMovie=${movie.id})}">
+                            <button th:text="#{view-films.th.actions.avis}"></button>
+                        </a>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+</html>
